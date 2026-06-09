@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}회원 관리{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0">회원 관리</h4>
+    <a href="{{ url_for('add_member') }}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>회원 등록</a>
+</div>
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th><th>이름</th><th>이메일</th><th>전화번호</th>
+                    <th>가입일</th><th>총 대출</th><th>현재 대출</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for m in members %}
+            <tr>
+                <td>{{ m.member_id }}</td>
+                <td>{{ m.name }}</td>
+                <td>{{ m.email }}</td>
+                <td>{{ m.phone or '-' }}</td>
+                <td>{{ m.join_date }}</td>
+                <td>{{ m.total_loans }}</td>
+                <td>
+                    {% if m.active_loans > 0 %}
+                        <span class="badge bg-primary">{{ m.active_loans }}권</span>
+                    {% else %}
+                        <span class="text-muted">0</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7" class="text-center text-muted py-3">회원이 없습니다.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

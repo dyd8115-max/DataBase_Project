@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}도서 등록{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center mb-4 gap-3">
+    <a href="{{ url_for('books') }}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i></a>
+    <h4 class="fw-bold mb-0">도서 등록</h4>
+</div>
+<div class="card border-0 shadow-sm" style="max-width:560px;">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">제목 <span class="text-danger">*</span></label>
+                <input type="text" name="title" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">저자 <span class="text-danger">*</span></label>
+                <input type="text" name="author" class="form-control" required>
+            </div>
+            <div class="row g-2 mb-3">
+                <div class="col">
+                    <label class="form-label fw-semibold">ISBN</label>
+                    <input type="text" name="isbn" class="form-control">
+                </div>
+                <div class="col">
+                    <label class="form-label fw-semibold">출판연도</label>
+                    <input type="number" name="published_year" class="form-control" min="1000" max="2100">
+                </div>
+            </div>
+            <div class="row g-2 mb-3">
+                <div class="col">
+                    <label class="form-label fw-semibold">카테고리</label>
+                    <input type="text" name="category" class="form-control" placeholder="예: 컴퓨터/IT">
+                </div>
+                <div class="col">
+                    <label class="form-label fw-semibold">보유 권수</label>
+                    <input type="number" name="total_copies" class="form-control" value="1" min="1" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">등록</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

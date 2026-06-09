@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}신규 대출{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center mb-4 gap-3">
+    <a href="{{ url_for('loans') }}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i></a>
+    <h4 class="fw-bold mb-0">신규 대출</h4>
+</div>
+<div class="card border-0 shadow-sm" style="max-width:480px;">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">도서 선택 <span class="text-danger">*</span></label>
+                <select name="book_id" class="form-select" required>
+                    <option value="">-- 도서를 선택하세요 --</option>
+                    {% for book in books %}
+                    <option value="{{ book.book_id }}">
+                        {{ book.title }} — {{ book.author }} (재고: {{ book.avail_copies }})
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">회원 선택 <span class="text-danger">*</span></label>
+                <select name="member_id" class="form-select" required>
+                    <option value="">-- 회원을 선택하세요 --</option>
+                    {% for member in members %}
+                    <option value="{{ member.member_id }}">{{ member.name }} ({{ member.email }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="alert alert-info small">
+                <i class="bi bi-info-circle me-1"></i>
+                대출 기간은 <strong>14일</strong>입니다. 대출 처리 시 재고가 자동으로 차감됩니다.
+            </div>
+            <button type="submit" class="btn btn-primary w-100">대출 처리</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
